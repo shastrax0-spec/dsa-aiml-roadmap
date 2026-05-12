@@ -31,7 +31,11 @@ import { errorHandler } from './src/middleware/errorHandler.js';
 const app = express();
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || '*',
+  origin: [
+    'http://localhost:5173',
+    'https://dsa-aiml-roadmap.vercel.app',
+    process.env.CLIENT_URL,
+  ].filter(Boolean),
   credentials: true
 }));
 
