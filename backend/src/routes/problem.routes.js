@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { protect } from '../middleware/auth.js';
+import * as c from '../controllers/problem.controller.js';
+const r = Router();
+r.use(protect);
+r.get('/', c.listProblems);
+r.post('/', c.addProblem);
+r.put('/:id', c.updateProblem);
+r.delete('/:id', c.deleteProblem);
+export default r;

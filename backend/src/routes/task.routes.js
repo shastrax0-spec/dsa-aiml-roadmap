@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import { protect } from '../middleware/auth.js';
+import * as c from '../controllers/task.controller.js';
+const r = Router();
+r.use(protect);
+r.get('/', c.getAllTasks);
+r.get('/today', c.getTodayTasks);
+r.get('/pending', c.getPendingTasks);
+r.get('/stats', c.getStats);
+r.get('/:day', c.getTaskByDay);
+r.put('/:day', c.updateTask);
+export default r;
