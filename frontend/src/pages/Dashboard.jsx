@@ -47,6 +47,7 @@ export default function Dashboard() {
       <div>
         <h1 className="text-3xl font-bold">Welcome back, {user?.name?.split(' ')[0]} 👋</h1>
         <p className="text-gray-400 mt-1">Here's your roadmap snapshot.</p>
+        <p className="text-gray-300 mt-1">Created By ~Chittaranjan</p>
       </div>
 
       {/* ── Stat Cards ── */}
