@@ -3,9 +3,11 @@ import User from '../models/User.js';
 import DailyTask from '../models/DailyTask.js';
 import { ROADMAP } from '../seed/roadmapData.js';
 
-const signToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '30d' });
-
+const token = jwt.sign(
+  { id: user._id },
+  process.env.JWT_SECRET,
+  { expiresIn: '30d' }  // change from '1d' or '7d' to '30d'
+);
 const provisionRoadmap = async (userId, startDate) => {
   const tasks = ROADMAP.map((r) => {
     const scheduled = new Date(startDate);
