@@ -21,12 +21,15 @@ export const useAuth = create((set) => ({
     set({ user: null, token: null });
   },
   fetchMe: async () => {
-    if (!localStorage.getItem('token')) return set({ loading: false });
-    try {
-      const { data } = await api.get('/auth/me');
-      set({ user: data.user, loading: false });
-    } catch {
-      set({ user: null, loading: false });
-    }
-  },
+  const token = localStorage.getItem('token');
+  if (!token) return set({ loading: false, user: null, token: null });
+  try {
+    const { data } = await api.get('/auth/me');
+    set({ user: data.user, token, loading: false });
+  } catch {
+    // Only logout if token is truly invalid (401)
+    localStorage.removeItem('token');
+    set({ user: null, token: null, loading: false });
+  }
+},
 }));
